@@ -9,33 +9,48 @@ mongoose.connect(dbURI)
     .catch((err)=>console.log(err , "database not connectd"));
 
 app.set('view engine' , 'ejs');
-// const blog = [
-//     {title : 'this is best not but ggod 100' , text : "also iam good yes 100"},
-//     {title : 'this is best not but ggod 200' , text : "also iam good yes 200"},
-//     {title : 'this is best not but ggod 300' , text : "also iam good yes 300"}
-// ];
 
 app.use(express.static("./Css"));
 app.use(express.static("./images"));
 
-// app.get("/" , (req , res)=>{
-//     res.render("index" , {blogs : blog});
-// })
+
 app.get("/" , (req , res)=>{
     res.render("index");
 })
 
-//mongo_db routing
-// app.get("/abc" , (req , res) => {
-//     const user2 = new User({
-//         user_name : "Suleman",
-//         user_age : 18,
-//         user_job : "Computer science"
-//     })
-//     user2.save()
-//         .then((result) => res.send(result))
-//         .catch((err)=> console.log(err))
-// });
+// mongo_db routing
+app.get("/abc" , (req , res) => {
+    const allData = async () => {
+        try {
+            const userData1 = new User({
+                user_name : "Suleman",
+                user_age : 18,
+                user_job : "Computer science"
+            })
+            const userData2 = new User({
+                user_name : "majid",
+                user_age : 22,
+                user_job : "Computer science"
+            })
+            const userData3 = new User({
+                user_name : "abdul rehman",
+                user_age : 28,
+                user_job : "game develpor"
+            })
+            const userData4 = new User({
+                user_name : "wassem",
+                user_age : 33,
+                user_job : "Computer science"
+            })
+            const result = await User.insertMany([userData1 , userData2 , userData3 , userData4]);
+            res.send(result);
+            res.end()
+        } catch (error) {
+            console.log(error)
+        }   
+    }
+    allData()
+});
 
 app.get("/about" , (req , res)=>{
     res.redirect("/user");
