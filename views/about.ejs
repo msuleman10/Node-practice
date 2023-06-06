@@ -17,9 +17,11 @@
     <center>
         <div>
             <% user.map((e)=>{ %>
-                <h1><%= e.user_name %></h1>
+                <a href="/user/<%= e._id %>">
+                    <h1><%= e.user_name %></h1>
+                </a>
                 <h2><%= e.user_job %></h3>
-                <h3><%= e.user_age %></h3>    
+                    <h3><%= e.user_age %></h3>
             <%})%>    
         </div>
     </center>

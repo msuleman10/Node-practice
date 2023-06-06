@@ -40,6 +40,11 @@ app.get("/contect-us" , (req , res)=>{
     res.render("contect");
 })
 
+app.get("/user/:id" , (req , res)=>{
+    const id = req.params.id;
+    User.findById(id).then(result => res.render("userData" , {result})).catch(err => console.log(err));
+})
+
 app.get("/about-us" , (req , res)=>{
     res.redirect("/about" );
 })
